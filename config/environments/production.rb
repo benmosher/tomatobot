@@ -1,4 +1,5 @@
 require Rails.root.join("config/smtp")
+Rails.application.routes.default_url_options[:host] = ENV.fetch("APPLICATION_HOST")
 Rails.application.configure do
   config.cache_classes = true
   config.eager_load = true
