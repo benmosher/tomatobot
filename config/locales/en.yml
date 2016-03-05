@@ -22,3 +22,18 @@ en:
     new:
     create:
       no_code: "As a Slack bot, Tomatobot requires access to your Slack team."
+
+  commands:
+    startwork:
+      help: Just type `/startwork` when you want to start. Tomatobot will notify you after 25 minutes, when it's time to give your focus a rest.
+      started: Time has started. You'll get a message when your 25 minutes is up. Remember, if you encounter a potential distraction, just type `/distract` followed by a quick note about what it is, and you'll be reminded to look at it during your break.
+    distraction:
+      help: Type `/distraction` followed by the name of the thing you were almost distracted by. I'll keep it safe, and remind you during your break, so you can jump straight back to focusing on your work.
+      missing: You must type `/distraction`, then a word or two about the thing that's distracting you. For example, say `/distract Call Jaakko` and during your break, you'll get a reminder about it. 
+      saved: Got it. I'll remind you during your next break.
+    completed:
+      help: Type `/completed` followed by two or three words about what you achieved in the last 25 minutes.
+      missing: You must type `/completed`, then a word or two about the thing you got completed. 
+      saved: Understood. I'll keep a note of this so you can review everything later. 
+    review:
+      help: Type `/review` to see a summary of your Pomodoro units today, and what stuff you got done.
