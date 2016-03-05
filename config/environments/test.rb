@@ -1,3 +1,4 @@
+Rails.application.routes.default_url_options[:host] = "example.com"
 Rails.application.configure do
   config.cache_classes = true
   config.eager_load = false

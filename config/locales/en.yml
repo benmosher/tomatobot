@@ -17,3 +17,8 @@ en:
 
   titles:
     application: Tomatobot
+
+  teams:
+    new:
+    create:
+      no_code: "As a Slack bot, Tomatobot requires access to your Slack team."
