@@ -40,7 +40,7 @@ class CommandsController < ApplicationController
 private
 
   def accept_ssl_checks
-    render text: "Working" if params[:ssl_check] == true
+    render text: "Working" if params[:ssl_check].present? 
   end
   
   def verify_slack_token
