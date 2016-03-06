@@ -4,6 +4,8 @@ if ENV.fetch("COVERAGE", false)
 end
 
 require "webmock/rspec"
+require "sidekiq/testing"
+Sidekiq::Testing.fake!
 
 # http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|

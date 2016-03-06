@@ -21,6 +21,10 @@ RSpec.describe CommandsController, type: :controller do
     }
   end
 
+  before :each do
+    allow(EndTaskWorker).to receive(:perform_in)
+  end
+
   describe "GET #start" do
     let :start_attributes do
       call_attributes.merge(command: "/startwork")
