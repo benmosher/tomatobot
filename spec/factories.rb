@@ -1,4 +1,10 @@
 FactoryGirl.define do
+  factory :task do
+    team
+    user
+    completed { Faker::Hipster.sentence(3) }
+    distraction { Faker::Hipster.sentence(3) } 
+  end
   factory :user do
     slack_id { Faker::Internet.password(5) }
     name { Faker::Internet.user_name }
