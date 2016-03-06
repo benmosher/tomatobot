@@ -30,11 +30,12 @@ en:
     distraction:
       help: Type `/distraction` followed by the name of the thing you were almost distracted by. I'll keep it safe, and remind you during your break, so you can jump straight back to focusing on your work.
       missing: You must type `/distraction`, then a word or two about the thing that's distracting you. For example, say `/distract Call Jaakko` and during your break, you'll get a reminder about it. 
-      notasks: You haven't started working yet. Once you start working, use `/distraction` to record things that would otherwise distract you.
       saved: Got it. I'll remind you during your next break.
+      no_tasks: You haven't started working yet. Once you start working, use `/distraction` to record things that would otherwise distract you.
     completed:
       help: Type `/completed` followed by two or three words about what you achieved in the last 25 minutes.
       missing: You must type `/completed`, then a word or two about the thing you got completed. 
       saved: Understood. I'll keep a note of this so you can review everything later. 
+      no_tasks: You haven't started working yet. Once you start working, use `/completed` to record things you get done.
     review:
       help: Type `/review` to see a summary of your Pomodoro units today, and what stuff you got done.

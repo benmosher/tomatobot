@@ -24,5 +24,6 @@ module Tomatobot
     config.action_controller.action_on_unpermitted_parameters = :raise
     config.active_record.raise_in_transactional_callbacks = true
     config.active_job.queue_adapter = :sidekiq
+    config.autoload_paths += %W(#{config.root}/app/workers)
   end
 end

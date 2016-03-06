@@ -5,6 +5,6 @@ class Task < ActiveRecord::Base
   validates :team, presence: true
   validates :user, presence: true
 
-  serialize :completed
-  serialize :distractions
+  serialize :completed, Array
+  serialize :distraction, Array
 end
