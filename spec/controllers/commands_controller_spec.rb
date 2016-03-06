@@ -4,6 +4,10 @@ RSpec.describe CommandsController, type: :controller do
     FactoryGirl.create(:team)
   end
 
+  let :user do
+    FactoryGirl.create(:user)
+  end
+
   let :call_attributes do
     {
       token: "test_token",
@@ -11,8 +15,8 @@ RSpec.describe CommandsController, type: :controller do
       team_domain: "example",
       channel_id: "channel1",
       channel_name: "general",
-      user_id: "U121331",
-      user_name: "Erika",
+      user_id: user.slack_id,
+      user_name: user.name,
       response_url: "https://hooks.slack.com/commands/989779"
     }
   end
@@ -45,6 +49,17 @@ RSpec.describe CommandsController, type: :controller do
     it "returns http success" do
       post :startwork, start_attributes
       expect(response).to have_http_status(:success)
+    end
+    
+    it "loads the correct user" do
+      post :startwork, start_attributes
+      expect(assigns(:user)).to eq(user)
+    end
+
+    it "creates the user if they don't exist" do
+      post :startwork, start_attributes.merge(user_id: "NEWUSERID", user_name: "Sam")
+      expect(assigns(:user).slack_id).to eq("NEWUSERID")
+      expect(assigns(:user).name).to eq("Sam")
     end
   end
 

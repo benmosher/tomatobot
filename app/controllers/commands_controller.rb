@@ -3,6 +3,7 @@ class CommandsController < ApplicationController
   before_action :verify_slack_token
   before_action :check_team
   before_action :check_action
+  before_action :find_or_create_user
 
   def startwork
     return help_response if help_requested?
@@ -38,6 +39,11 @@ private
 
   def check_action
     fail "Bad action" unless params[:action] == params[:command].delete("/")
+  end
+
+  def find_or_create_user
+    @user = User.find_or_create_by(slack_id: params[:user_id])
+    @user.tap { |user| user.update(name: params[:user_name]) }
   end
 
   def missing_response
