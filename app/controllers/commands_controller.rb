@@ -7,6 +7,8 @@ class CommandsController < ApplicationController
 
   def startwork
     return help_response if help_requested?
+    task = Task.create(user: @user, team: @team)
+    EndTaskWorker.perform_in(25.minutes, task.id, params[:response_url])
     render text: t("commands.startwork.started")
   end
 
