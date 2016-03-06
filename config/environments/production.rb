@@ -18,5 +18,6 @@ Rails.application.configure do
   config.log_formatter = ::Logger::Formatter.new
   config.active_record.dump_schema_after_migration = false
   config.action_mailer.default_url_options = { host: ENV.fetch("APPLICATION_HOST") }
+  config.force_ssl = true
 end
 Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
