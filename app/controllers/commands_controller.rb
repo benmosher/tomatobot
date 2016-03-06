@@ -1,5 +1,6 @@
 class CommandsController < ApplicationController
   skip_before_action :verify_authenticity_token
+  before_action :accept_ssl_checks
   before_action :verify_slack_token
   before_action :check_team
   before_action :check_action
@@ -38,6 +39,10 @@ class CommandsController < ApplicationController
 
 private
 
+  def accept_ssl_checks
+    render "Working" if params[:ssl_check] == true
+  end
+  
   def verify_slack_token
     fail "Incorrect token" unless params[:token] == token
   end
