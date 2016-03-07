@@ -4,8 +4,8 @@ class TeamsController < ApplicationController
 
   def create
     if params[:code].present?
-      logger.debug Rails.application.routes.url_helpers.connect_url 
-      @team = Team.find_or_initialize_by(slack_team_id: exchanged_token[:team_id])
+      @team = Team.
+        find_or_initialize_by(slack_team_id: exchanged_token[:team_id])
       @team.access_token = exchanged_token[:access_token]
       @team.save
     else
@@ -20,7 +20,6 @@ private
                          new(params[:code]).
                          exchange.
                          symbolize_keys
-    logger.debug @exchanged_token
-    @exchanged_token
+    fail if @exchanged_token[:ok] == false
   end
 end
