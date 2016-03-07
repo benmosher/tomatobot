@@ -21,5 +21,6 @@ private
                          exchange.
                          symbolize_keys
     fail if @exchanged_token[:ok] == false
+    @exchanged_token
   end
 end
