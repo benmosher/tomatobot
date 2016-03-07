@@ -13,11 +13,13 @@ class TeamsController < ApplicationController
   end
 
 private
-  
+
   def exchanged_token
     @exchanged_token ||= SlackTokenExchanger.
                          new(params[:code]).
                          exchange.
                          symbolize_keys
+    logger.debug @exchanged_token
+    @exchanged_token
   end
 end
