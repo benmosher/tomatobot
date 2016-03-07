@@ -12,10 +12,4 @@ class SlackApiClient
     options[:body] = query
     self.class.post('/oauth.access', options)
   end
-
-private
-
-  def slack_config
-    YAML.load(ERB.new(File.new("config/slack.yml").read).result).symbolize_keys
-  end
 end

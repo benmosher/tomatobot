@@ -4,8 +4,9 @@ class TeamsController < ApplicationController
 
   def create
     if params[:code].present?
-      @team = Team.find_or_create_by(slack_team_id: exchanged_token[:team_id])
-      @team.update(team_params)
+      @team = Team.find_or_initialize_by(slack_team_id: exchanged_token[:team_id])
+      @team.access_token = exchanged_token[:access_token]
+      @team.save
     else
       redirect_to root_path, alert: t("teams.create.no_code")
     end
@@ -18,12 +19,5 @@ private
                          new(params[:code]).
                          exchange.
                          symbolize_keys
-  end
-
-  def team_params
-    {
-      slack_team_id: exchanged_token[:team_id],
-      access_token: exchanged_token[:access_token]
-    }
   end
 end
