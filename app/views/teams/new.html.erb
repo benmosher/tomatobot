@@ -1,2 +1,79 @@
-<h1>Connect with Slack</h1>
+<h2 class="sr-only">What is Tomatobot?</h2>
+<p class="lead">Hi, I'm Tomatobot. I'm a simple Pomodoro timer, and I can join your team in Slack.</p>
+<p>
+  Simply add my to your Slack team, then your team can type 
+  <code>/startwork</code> and I'll help them stay focused.
+</p>
+<h2>Connect with Slack</h2>
 <a href="https://slack.com/oauth/authorize?scope=commands&client_id=<%= ENV["SLACK_CLIENT_ID"] %>&redirect_uri=<%= u connect_url %>"><img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x" /></a>
+<h2>Commands</h2>
+<div class="row">
+  <div class="col-md-3">
+    <h3><code>/startwork</code></h3>
+    <p>
+      I'll start tracking a new Pomodoro unit. There's no flashy countdown, 
+      I'll leave you alone to focus until it's time for a break.
+    </p>
+  </div>
+  <div class="col-md-3">
+    <h3><code>/distraction</code></h3>
+    <p>
+      While you're working, if something distracts you, type this, followed by
+      the thing that's distracting you, for example, 
+      <code>/distraction reply to Jaakko</code>.
+    </p>
+    <p>
+      At the end of your current Pomodoro, I'll remind you about the 
+      distracitons, so you can forget about them and really focus.
+    </p>
+  </div>
+  <div class="col-md-3">
+    <h3><code>/completed</code></h3>
+    <p>
+      Whether you're currently mid-Pomodoro, or have finished a Pomodoro, this
+      lets you record what you acheived. Then, later, we can take a look at
+      what you got done together.
+    </p>
+    <p>
+      Complete two things? No problem, you can send your acheivements to the 
+      <code>/completed</code> command any number of times.
+    </p>
+  </div>
+  <div class="col-md-3">
+    <h3><code>/review</code></h3>
+    <p>
+      Preparing for a daily standup? Grab a <code>/review</code> and I'll give 
+      you a list of your Pomodoros today, and what you got done in each one.
+    </p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <h2>Help</h2>
+    <p>
+      From within Slack, you can type any command followed by the word 
+      <code>help</code> for some extra information on how to use it. For 
+      example <code>/distraction help</code>.
+    </p>
+    <p>
+      Tomatobot is a weekend project by
+      <%= link_to "@mtthwhggns", "https://twitter.com/mtthwhggns" %>.
+      Feel free to tweet with ideas, suggestions, help requests and similar.
+    </p>
+  </div>
+  <div class="col-md-6">
+    <h2>Privacy</h2>
+    <p>
+      Absolutely minimal information is stored, only IDs made up of letters and 
+      numbers, which can't easily be linked with your team, and the details you 
+      type for completed and distractions.
+    </p>
+    <p>
+      The database doesn't contain names of teams or users whatsoever.
+    </p>
+    <p>
+      None of the data will ever be shared, except for maybe some anonymous 
+      statistics in the future.
+    </p>
+  </div>
+</div>
