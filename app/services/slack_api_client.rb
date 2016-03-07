@@ -8,6 +8,7 @@ class SlackApiClient
   def oauth_access(query = {}, options = {})
     query[:client_id] = ENV["SLACK_CLIENT_ID"] 
     query[:client_secret] = ENV["SLACK_CLIENT_SECRET"] 
+    logger.debug Rails.application.routes.url_helpers.connect_url 
     query[:redirect_uri] = Rails.application.routes.url_helpers.connect_url 
     options[:body] = query
     self.class.post('/oauth.access', options)
