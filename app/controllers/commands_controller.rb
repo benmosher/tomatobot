@@ -35,11 +35,19 @@ class CommandsController < ApplicationController
 
   def review
     return help_response if help_requested?
+    response_type = "in_channel" if params[:text]&.start_with?("public")
     @tasks = @user.tasks.where("created_at >= ?", Time.zone.now.beginning_of_day)
-    render text: create_list
+    render json: response_json(create_list, response_type)
   end
 
 private
+
+  def response_json(text, response_type = "ephemeral")
+    {
+      response_type: response_type,
+      text: text
+    }
+  end
 
   def accept_ssl_checks
     render text: "Working" if params[:ssl_check].present? 
