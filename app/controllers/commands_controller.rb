@@ -9,7 +9,9 @@ class CommandsController < ApplicationController
   def startwork
     return help_response if help_requested?
     task = Task.create(user: @user, team: @team)
-    EndTaskWorker.perform_in(25.minutes, task.id, params[:response_url])
+    EndTaskWorker.perform_in(unit_duration.minutes, 
+                             task.id, 
+                             params[:response_url])
     render text: t("commands.startwork.started")
   end
 
@@ -67,6 +69,14 @@ private
   def find_or_create_user
     @user = User.find_or_create_by(slack_id: params[:user_id])
     @user.tap { |user| user.update(name: params[:user_name]) }
+  end
+
+  def unit_duration
+    if Rails.env.production?
+      25
+    else
+      2
+    end
   end
 
   def no_previous 
