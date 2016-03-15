@@ -14,8 +14,7 @@ HTTP_ERRORS = [
   Errno::EINVAL,
   Net::HTTPBadResponse,
   Net::HTTPHeaderSyntaxError,
-  Net::ProtocolError,
-  Timeout::Error
+  Net::ProtocolError
 ].freeze
 
 SMTP_SERVER_ERRORS = [
