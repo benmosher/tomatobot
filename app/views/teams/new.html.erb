@@ -1,11 +1,18 @@
-<h2 class="sr-only">What is Tomatobot?</h2>
-<p class="lead">Hi, I'm Tomatobot. I'm a simple Pomodoro timer, and I can join your team in Slack.</p>
-<p>
-  Simply add my to your Slack team, then your team can type 
-  <code>/startwork</code> and I'll help them stay focused.
-</p>
-<h2>Connect with Slack</h2>
-<a href="https://slack.com/oauth/authorize?scope=commands&client_id=<%= ENV["SLACK_CLIENT_ID"] %>&redirect_uri=<%= u connect_url %>"><img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x" /></a>
+<div class="row">
+  <div class="col-md-8">
+    <h2 class="sr-only">What is Tomatobot?</h2>
+    <p class="lead">Hi, I'm Tomatobot. I'm a simple Pomodoro timer, and I can join your team in Slack.</p>
+    <p>
+      Simply add my to your Slack team, then your team can type 
+      <code>/startwork</code> and I'll help them stay focused.
+    </p>
+    <h2>Connect with Slack</h2>
+    <a href="https://slack.com/oauth/authorize?scope=commands&client_id=<%= ENV["SLACK_CLIENT_ID"] %>&redirect_uri=<%= u connect_url %>"><img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x" /></a>
+  </div>
+  <div class="col-md-4">
+    <%= image_tag("logo.png", size: "220x220", class: "pull-right") %>
+  </div>
+</div>
 <h2>Commands</h2>
 <div class="row">
   <div class="col-md-3">
