@@ -3,7 +3,10 @@ class EndTaskWorker
 
   def perform(task_id, response_url)
     @task = Task.find(task_id)
-    message = ["Time's up.", break_duration, distractions].join(" ")
+    message = [t("workers.end_work.time_up"), 
+               completed,
+               break_duration, 
+               distractions].join(" ")
     SlackNotificationSender.new(response_url).send(message)
   end
 
@@ -11,17 +14,27 @@ private
 
   def break_duration
     if todays_tasks.count % 4 == 0
-      "Take a 20 minute break."
+      t("workers.end_work.break.twenty")
     else
-      "Take a 5 minute break."
+      t("workers.end_work.break.five")
+    end
+  end
+
+  def completed
+    if @task.completed.empty?
+      t("workers.end_work.completed.none")
+    else
+      t("workers.end_work.completed.list", 
+        sentence: @task.completed.to_sentence)
     end
   end
 
   def distractions
     if @task.distraction.empty?
-      "You didn't tell me about any distractions, well done!"
+      t("workers.end_work.distractions.none")
     else
-      "You were distracted by " + @task.distraction.to_sentence + "."
+      t("workers.end_work.distractions.list", 
+        sentence: @task.distraction.to_sentence)
     end
   end
   

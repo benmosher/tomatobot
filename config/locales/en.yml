@@ -22,14 +22,13 @@ en:
     new:
     create:
       no_code: "As a Slack bot, Tomatobot requires access to your Slack team."
-
   commands:
     startwork:
       help: Just type `/startwork` when you want to start. Tomatobot will notify you after 25 minutes, when it's time to give your focus a rest.
       started: Time has started. You'll get a message when your 25 minutes is up. Remember, if you encounter a potential distraction, just type `/distract` followed by a quick note about what it is, and you'll be reminded to look at it during your break.
     distraction:
       help: Type `/distraction` followed by the name of the thing you were almost distracted by. I'll keep it safe, and remind you during your break, so you can jump straight back to focusing on your work.
-      missing: You must type `/distraction`, then a word or two about the thing that's distracting you. For example, say `/distract Call Jaakko` and during your break, you'll get a reminder about it. 
+      missing: You must type `/distraction`, then a word or two about the thing that's distracting you. For example, say `/distraction Call Jaakko` and during your break, you'll get a reminder about it. 
       saved: Got it. I'll remind you during your next break.
       no_tasks: You haven't started working yet. Once you start working, use `/distraction` to record things that would otherwise distract you.
     completed:
@@ -42,3 +41,12 @@ en:
   workers:
     end_work:
       time_up: Time is up!
+      break:
+        twenty: Time to take a longer, 20 minute break.
+        five: Take a quick five minute break, then we can get back to work.
+      distractions:
+        none: You didn't tell me about any distractions, well done!
+        list: "During your break, you can think about the things you told me you were distracted by: %{sentence}."
+      completed:
+        none: Don't forget to tell me what you got done in the last 25 minutes, by typing `/completed` followed by a few words about what you got done. 
+        list: "You've already told me that you got %{sentence} done. You can tell me about anything else now."
