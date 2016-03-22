@@ -1,12 +1,13 @@
 class EndTaskWorker
+  include ApplicationHelper
   include Sidekiq::Worker
 
   def perform(task_id, response_url)
     @task = Task.find(task_id)
     message = [I18n.t("workers.end_work.time_up"), 
                completed,
-               break_duration, 
-               distractions].join(" ")
+               distractions,
+               break_duration].join(" ")
     SlackNotificationSender.new(response_url).send(message)
   end
 
@@ -25,7 +26,7 @@ private
       I18n.t("workers.end_work.completed.none")
     else
       I18n.t("workers.end_work.completed.list", 
-             sentence: @task.completed.to_sentence)
+             sentence: bold_list(@task.completed).to_sentence)
     end
   end
 
@@ -34,7 +35,7 @@ private
       I18n.t("workers.end_work.distractions.none")
     else
       I18n.t("workers.end_work.distractions.list", 
-             sentence: @task.distraction.to_sentence)
+             sentence: bold_list(@task.distraction).to_sentence)
     end
   end
   
