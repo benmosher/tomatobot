@@ -8,6 +8,7 @@ class CommandsController < ApplicationController
 
   def startwork
     return help_response if help_requested?
+    return already_active_response if task_active?
     task = Task.create(user: @user, team: @team)
     EndTaskWorker.perform_in(unit_duration.minutes, 
                              task.id, 
@@ -61,6 +62,11 @@ private
     @team = Team.find_by!(slack_team_id: params[:team_id])
   end
 
+  def task_active?
+    return false if last_task.nil?
+    last_task.created_at > 25.minutes.ago
+  end
+
   def last_task
     @last_task ||= @user.tasks.last
   end
@@ -97,6 +103,10 @@ private
 
   def help_response
     render text: t("commands.#{params[:action]}.help")
+  end
+
+  def already_active_response
+    render text: t("commands.startwork.already_active")
   end
 
   def help_requested?
