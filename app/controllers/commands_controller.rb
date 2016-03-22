@@ -64,7 +64,7 @@ private
 
   def task_active?
     return false if last_task.nil?
-    last_task.created_at > 25.minutes.ago
+    last_task.created_at > unit_duration.minutes.ago
   end
 
   def last_task
