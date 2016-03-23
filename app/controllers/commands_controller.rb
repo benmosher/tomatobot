@@ -36,8 +36,10 @@ class CommandsController < ApplicationController
 
   def review
     return help_response if help_requested?
-    response_type = "in_channel" if params[:text]&.start_with?("public")
-    @tasks = @user.tasks.where("created_at >= ?", Time.zone.now.beginning_of_day)
+    response_type = "in_channel" if review_publicly?
+    @tasks = @user.tasks.
+              where("created_at >= ?", beginning_of_review_date).
+              where("created_at <= ?", beginning_of_review_date + 1.day)
     render json: response_json(create_list, response_type)
   end
 
@@ -50,6 +52,14 @@ private
     }
   end
 
+  def beginning_of_review_date
+    if params[:text]&.downcase&.include? "yesterday"
+      (Time.zone.now - 1.day).beginning_of_day
+    else
+      Time.zone.now.beginning_of_day
+    end
+  end
+
   def accept_ssl_checks
     render text: "Working" if params[:ssl_check].present? 
   end
@@ -60,6 +70,10 @@ private
 
   def check_team
     @team = Team.find_by!(slack_team_id: params[:team_id])
+  end
+
+  def review_publicly?
+    params[:text]&.start_with?("public")
   end
 
   def task_active?
