@@ -95,13 +95,26 @@ RSpec.describe CommandsController, type: :controller do
   end
 
   describe "GET #review" do
-    let :review_attributes do
-      call_attributes.merge(command: "/review")
+    context "with no date set" do
+      let :review_attributes do
+        call_attributes.merge(command: "/review")
+      end
+
+      it "returns http success" do
+        get :review, review_attributes
+        expect(response).to have_http_status(:success)
+      end
     end
 
-    it "returns http success" do
-      get :review, review_attributes
-      expect(response).to have_http_status(:success)
+    context "with yesterday set" do
+      let :yesterday_review_attributes do
+        call_attributes.merge(command: "/review", text: "yesterday")
+      end
+
+      it "returns http success" do
+        get :review, yesterday_review_attributes
+        expect(response).to have_http_status(:success)
+      end
     end
   end
 
