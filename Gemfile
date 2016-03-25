@@ -20,7 +20,7 @@ gem "pg"
 gem "puma"
 gem "rack-canonical-host"
 gem "rails", "~> 4.2.0"
-gem "rails_12factor"
+gem "rails_12factor", group: :production
 gem "recipient_interceptor"
 gem "sass-rails", "~> 5.0"
 gem "simple_form"
