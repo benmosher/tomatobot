@@ -25,7 +25,7 @@ en:
   commands:
     startwork:
       help: Just type `/startwork` when you want to start. Tomatobot will notify you after 25 minutes, when it's time to give your focus a rest.
-      started: Time has started. You'll get a message when your 25 minutes is up. Remember, if you encounter a potential distraction, just type `/distract` followed by a quick note about what it is, and you'll be reminded to look at it during your break.
+      started: Time has started. You'll get a message when your 25 minutes is up. Remember, if you encounter a potential distraction, just type `/distraction` followed by a quick note about what it is, and you'll be reminded to look at it during your break.
       already_active: You're already part way through a Pomodoro unit, so you can't start another until this one's finished.
     distraction:
       help: Type `/distraction` followed by the name of the thing you were almost distracted by. I'll keep it safe, and remind you during your break, so you can jump straight back to focusing on your work.
