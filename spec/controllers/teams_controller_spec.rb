@@ -13,12 +13,28 @@ RSpec.describe TeamsController, type: :controller do
       team_id: "ABCDEFG"
     }.stringify_keys
   end
+  
+  let :faulty_exchanged_data do
+    {
+      ok: false,
+    }.stringify_keys
+  end
 
   describe "GET #create" do
     context "with no code" do
       it "redirects to root" do
         get :create
         expect(response).to redirect_to(root_url)
+      end
+    end
+
+    context "with an invalid code" do
+      it "redirects to root" do
+        expect(SlackTokenExchanger).to receive(:new).with("WRONGCODE"){ exchanger }
+        expect(exchanger).to receive(:exchange){ faulty_exchanged_data }
+        get :create, code: "WRONGCODE"
+        expect(response).to redirect_to(root_url)
+        expect(Team.first).to be_nil
       end
     end
 

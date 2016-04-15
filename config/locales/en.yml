@@ -22,6 +22,7 @@ en:
     new:
     create:
       no_code: "As a Slack bot, Tomatobot requires access to your Slack team."
+      exchange_failed: "There was a problem adding joining your Slack team. You can try again, or contact Slack for help."
   commands:
     startwork:
       help: Just type `/startwork` when you want to start. Tomatobot will notify you after 25 minutes, when it's time to give your focus a rest.
