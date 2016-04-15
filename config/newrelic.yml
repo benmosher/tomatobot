@@ -3,15 +3,15 @@ common: &default_settings
   audit_log:
     enabled: false
   browser_monitoring:
-    auto_instrument: true
-  capture_params: false
+    auto_instrument: false 
+  capture_params: true
   developer_mode: false
   error_collector:
     capture_source: true
     enabled: true
     ignore_errors: "ActionController::RoutingError,Sinatra::NotFound"
   license_key: "<%= ENV["NEW_RELIC_LICENSE_KEY"] %>"
-  log_level: info
+  log_level: warn 
   monitor_mode: true
   transaction_tracer:
     enabled: true
