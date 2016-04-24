@@ -120,7 +120,11 @@ private
   end
 
   def already_active_response
-    render text: t("commands.startwork.already_active")
+    end_time = last_task.created_at + unit_duration.minutes
+    time_remaining = (end_time - Time.now).round / 60
+    render text: t("commands.startwork.already_active", 
+                   time:  "#{time_remaining} "\
+                          "#{t("time.words.minute").pluralize(time_remaining)}")
   end
 
   def help_requested?

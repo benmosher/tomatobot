@@ -65,6 +65,30 @@ RSpec.describe CommandsController, type: :controller do
       expect(assigns(:user).slack_id).to eq("NEWUSERID")
       expect(assigns(:user).name).to eq("Sam")
     end
+
+    it "fails if a pomodoro is part-way through" do
+      post :startwork, start_attributes
+      Timecop.travel(Time.now + 1.minute) do
+        post :startwork, start_attributes
+        expect(response.body).to include("part way through")
+      end
+    end
+
+    it "shows how long is left" do
+      post :startwork, start_attributes
+      Timecop.travel(Time.now + 1.minute) do
+        post :startwork, start_attributes
+        expect(response.body).to include("1 minute remaining")
+      end
+    end
+
+    it "shows how long is left to the next whole minute" do
+      post :startwork, start_attributes
+      Timecop.travel(Time.now + 10.seconds) do
+        post :startwork, start_attributes
+        expect(response.body).to include("1 minute remaining")
+      end
+    end
   end
 
   describe "GET #distraction" do
