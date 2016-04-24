@@ -43,6 +43,7 @@ en:
       no_tasks: You haven't started working yet. Once you start working, use `/completed` to record things you get done.
     review:
       help: Type `/review` to see a summary of your Pomodoro units today, and what stuff you got done.
+      date_parse_failed: Sorry, I didn't understand the date. Type `/review` followed the date you would like to review your work for, for example, `review yesterday` or `/review 2016-03-10`.
   workers:
     end_work:
       time_up: Time is up!

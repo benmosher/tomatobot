@@ -119,6 +119,14 @@ RSpec.describe CommandsController, type: :controller do
   end
 
   describe "GET #review" do
+    before :each do
+      { 3 => DateTime.now, 
+        4 => 1.day.ago, 
+        5 => "2016-02-03 12:46"}.each do |count, date|
+        FactoryGirl.create_list(:task, count.to_i, created_at: date, user: user)
+      end
+    end
+
     context "with no date set" do
       let :review_attributes do
         call_attributes.merge(command: "/review")
@@ -127,6 +135,11 @@ RSpec.describe CommandsController, type: :controller do
       it "returns http success" do
         get :review, review_attributes
         expect(response).to have_http_status(:success)
+      end
+
+      it "returns the correct number of items" do
+        get :review, review_attributes
+        expect(assigns(:tasks).size).to eq(3)
       end
     end
 
@@ -138,6 +151,43 @@ RSpec.describe CommandsController, type: :controller do
       it "returns http success" do
         get :review, yesterday_review_attributes
         expect(response).to have_http_status(:success)
+      end
+
+      it "returns the correct number of items" do
+        get :review, yesterday_review_attributes
+        expect(assigns(:tasks).size).to eq(4)
+      end
+    end
+
+    context "with a specific date set" do
+      let :custom_review_attributes do
+        call_attributes.merge(command: "/review", text: "3 Feb 2016")
+      end
+
+      it "returns http success" do
+        get :review, custom_review_attributes
+        expect(response).to have_http_status(:success)
+      end
+
+      it "returns the correct number of items" do
+        get :review, custom_review_attributes
+        expect(assigns(:tasks).size).to eq(5)
+      end
+    end
+
+    context "with a date that could be a range" do
+      let :range_review_attributes do
+        call_attributes.merge(command: "/review", text: "last week")
+      end
+
+      it "returns http success" do
+        get :review, range_review_attributes
+        expect(response).to have_http_status(:success)
+      end
+
+      it "returns the correct number of items" do
+        get :review, range_review_attributes
+        expect(assigns(:tasks).size).to eq(0)
       end
     end
   end

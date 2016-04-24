@@ -36,6 +36,7 @@ class CommandsController < ApplicationController
 
   def review
     return help_response if help_requested?
+    return date_parse_failed if beginning_of_review_date.nil?
     response_type = "in_channel" if review_publicly?
     @tasks = @user.tasks.
               where("created_at >= ?", beginning_of_review_date).
@@ -53,10 +54,13 @@ private
   end
 
   def beginning_of_review_date
-    if params[:text]&.downcase&.include? "yesterday"
-      (Time.zone.now - 1.day).beginning_of_day
+    return @beginning_of_review_date if @beginning_of_review_date.present?
+    date_variable = params[:text]&.downcase&.gsub("public", "")
+    if date_variable.blank?
+      return @beginning_of_review_date = Time.zone.now.beginning_of_day
     else
-      Time.zone.now.beginning_of_day
+      date = Chronic.parse(date_variable)
+      @beginning_of_review_date = date&.beginning_of_day
     end
   end
 
@@ -125,6 +129,10 @@ private
     render text: t("commands.startwork.already_active", 
                    time:  "#{time_remaining} "\
                           "#{t("time.words.minute").pluralize(time_remaining)}")
+  end
+
+  def date_parse_failed 
+    render text: t("commands.review.date_parse_failed")
   end
 
   def help_requested?
