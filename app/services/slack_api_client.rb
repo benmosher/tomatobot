@@ -8,9 +8,19 @@ class SlackApiClient
   def oauth_access(query = {}, options = {})
     query[:client_id] = ENV["SLACK_CLIENT_ID"] 
     query[:client_secret] = ENV["SLACK_CLIENT_SECRET"] 
-    query[:redirect_uri] = redirect_url 
+    query[:redirect_uri] ||= redirect_url 
     options[:body] = query
-    self.class.post('/oauth.access', options)
+    self.class.post('/oauth.access', options.except(:redirect_uri))
+  end
+
+  def start_dnd(query = {}, options = {})
+    options[:body] = query
+    self.class.post("/dnd.setSnooze", options)
+  end
+
+  def end_dnd(query = {}, options = {})
+    options[:body] = query
+    self.class.post("/dnd.endSnooze", options)
   end
 
 private

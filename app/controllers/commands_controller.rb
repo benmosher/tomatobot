@@ -10,9 +10,11 @@ class CommandsController < ApplicationController
     return help_response if help_requested?
     return already_active_response if task_active?
     task = Task.create(user: @user, team: @team)
+    ActivateDndWorker.perform_async(@user.id) if start_dnd?
     EndTaskWorker.perform_in(unit_duration.minutes, 
                              task.id, 
-                             params[:response_url])
+                             params[:response_url],
+                             start_dnd?)
     render text: t("commands.startwork.started")
   end
 
@@ -137,6 +139,10 @@ private
 
   def help_requested?
     params[:text] == "help"
+  end
+
+  def start_dnd?
+    @user.dnd_mode && @user.slack_token.present?
   end
 
   def token

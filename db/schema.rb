@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160306123417) do
+ActiveRecord::Schema.define(version: 20160427100303) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,8 +39,12 @@ ActiveRecord::Schema.define(version: 20160306123417) do
   create_table "users", force: :cascade do |t|
     t.string   "slack_id"
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.string   "slack_token"
+    t.string   "url_key"
+    t.string   "timezone"
+    t.boolean  "dnd_mode",    default: false
   end
 
   add_index "users", ["slack_id"], name: "index_users_on_slack_id", unique: true, using: :btree

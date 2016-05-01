@@ -5,8 +5,8 @@ class SlackTokenExchanger
     @code = code
   end
 
-  def exchange
-    slack_client.oauth_access(code: @code)
+  def exchange(options = {})
+    slack_client.oauth_access( options.merge({ code: @code }))
   end
 
 private

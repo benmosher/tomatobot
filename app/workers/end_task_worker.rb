@@ -2,8 +2,9 @@ class EndTaskWorker
   include ApplicationHelper
   include Sidekiq::Worker
 
-  def perform(task_id, response_url)
+  def perform(task_id, response_url, dnd = false)
     @task = Task.find(task_id)
+    end_dnd if dnd
     message = [I18n.t("workers.end_work.time_up"), 
                completed,
                distractions,
@@ -41,5 +42,9 @@ private
   
   def todays_tasks
     @task.user.tasks.where("created_at >= ?", Time.zone.now.beginning_of_day)
+  end
+
+  def end_dnd
+    SlackApiClient.new.end_dnd(token: @task.user.slack_token)
   end
 end

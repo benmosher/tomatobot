@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2" >
+    <%= form_for @user, url: user_path(id: @user.id, key: @user.url_key) do |u| %>
+      <h2><%= @user.name %> <small><%= t("users.edit.heading") %></small></h2>
+      <div class="row">
+        <div class="col-sm-12">
+          <p class="lead"><%= t("users.edit.lead") %></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <h3><%= t("users.edit.profile.heading") %></h3>
+          <div class="form-group">
+            <%= u.label :timezone %>
+            <%= u.time_zone_select :timezone %>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <h3><%= t("users.edit.dnd.heading") %></h3>
+          <% if @user.slack_token.nil? %>
+            <p><%= t("users.edit.dnd.no_access") %></p>
+            <a href="https://slack.com/oauth/authorize?scope=dnd:write&client_id=<%= ENV["SLACK_CLIENT_ID"] %>&redirect_uri=<%= u update_user_token_url(id: @user.id, key: @user.url_key) %>"><img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x" /></a>
+          <% else %>
+            <div class="checkbox">
+              <%= u.label :dnd_mode do %>
+                <%= u.check_box :dnd_mode %>
+                <%= t("users.edit.dnd.label") %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <%= u.submit "Save Changes", class: "btn btn-success pull-right" %>
+        </div>
+    <% end %>
+  </div>
+</div>
