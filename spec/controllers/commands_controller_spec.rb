@@ -26,6 +26,10 @@ RSpec.describe CommandsController, type: :controller do
   end
 
   describe "GET #start" do
+    before :each do
+      Task.delete_all
+    end
+
     let :start_attributes do
       call_attributes.merge(command: "/startwork")
     end

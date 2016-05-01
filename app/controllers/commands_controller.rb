@@ -15,7 +15,7 @@ class CommandsController < ApplicationController
                              task.id, 
                              params[:response_url],
                              start_dnd?)
-    render text: t("commands.startwork.started")
+    render text: started_work_message
   end
 
   def distraction
@@ -110,6 +110,22 @@ private
       25
     else
       2
+    end
+  end
+
+  def started_work_message
+    [t("commands.startwork.started"), dnd_status_message].join(" ")
+  end
+
+  def dnd_status_message
+    if start_dnd?
+      [
+        t("commands.startwork.dnd_started"), 
+       "<#{edit_user_url(id: @user.id, key: @user.url_key)}|#{t("settings")}>"
+      ].join(". ")
+    else
+      "<#{edit_user_url(id: @user.id, key: @user.url_key)}|"\
+        "#{t("commands.startwork.offer_dnd")}>"
     end
   end
 

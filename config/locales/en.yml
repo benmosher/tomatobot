@@ -21,6 +21,7 @@ en:
   titles:
     application: Tomatobot
 
+  settings: Go to settings
   teams:
     new:
     create:
@@ -47,6 +48,8 @@ en:
       help: Just type `/startwork` when you want to start. Tomatobot will notify you after 25 minutes, when it's time to give your focus a rest.
       started: Time has started. You'll get a message when your 25 minutes is up. Remember, if you encounter a potential distraction, just type `/distraction` followed by a quick note about what it is, and you'll be reminded to look at it during your break.
       already_active: You're already part way through a Pomodoro unit, so you can't start another until this one's finished. You have %{time} remaining.
+      dnd_started: I've snoozed your Slack notifications temporarily, and I'll enable them again at the end.
+      offer_dnd: If you like, I can automatically snooze your notifications while you're focusing.
     distraction:
       help: Type `/distraction` followed by the name of the thing you were almost distracted by. I'll keep it safe, and remind you during your break, so you can jump straight back to focusing on your work.
       missing: You must type `/distraction`, then a word or two about the thing that's distracting you. For example, say `/distraction Call Jaakko` and during your break, you'll get a reminder about it. 
