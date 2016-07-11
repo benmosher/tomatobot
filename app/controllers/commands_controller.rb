@@ -5,6 +5,7 @@ class CommandsController < ApplicationController
   before_action :check_team
   before_action :check_action
   before_action :find_or_create_user
+  before_action :send_notification, if: "ENV[\"NOTIFICATION_URL\"].present?"
 
   def startwork
     return help_response if help_requested?
@@ -161,6 +162,13 @@ private
     @user.dnd_mode && @user.slack_token.present?
   end
 
+  def notification_present?
+    ENV["NOTIFICATION_URL"].present?
+  end
+
+  def send_notification
+    SendNotificationWorker.perform_in(3.seconds, params[:response_url])
+  end
   def token
     return "test_token" if Rails.env.test?
     ENV["SLACK_COMMAND_TOKEN"]
