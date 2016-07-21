@@ -12,6 +12,8 @@ module Tomatobot
   class Application < Rails::Application
     config.i18n.enforce_available_locales = true
     config.quiet_assets = true
+    config.serve_static_files = true
+    config.assets.enabled = true
     config.generators do |generate|
       generate.helper false
       generate.javascript_engine false
