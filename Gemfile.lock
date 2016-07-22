@@ -144,7 +144,6 @@ GEM
     neat (1.7.4)
       bourbon (>= 4.0)
       sass (>= 3.3)
-    newrelic_rpm (3.15.1.316)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     normalize-rails (3.0.3)
@@ -186,10 +185,6 @@ GEM
       rails-deprecated_sanitizer (>= 1.0.1)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
-    rails_12factor (0.0.3)
-      rails_serve_static_assets
-      rails_stdout_logging
-    rails_serve_static_assets (0.0.5)
     rails_stdout_logging (0.0.5)
     railties (4.2.6)
       actionpack (= 4.2.6)
@@ -304,7 +299,6 @@ DEPENDENCIES
   jquery-rails
   launchy
   neat (~> 1.7.0)
-  newrelic_rpm (>= 3.9.8)
   normalize-rails (~> 3.0.0)
   pg
   pry-rails
@@ -313,7 +307,6 @@ DEPENDENCIES
   rack-canonical-host
   rack-timeout
   rails (~> 4.2.0)
-  rails_12factor
   rails_stdout_logging
   recipient_interceptor
   refills
