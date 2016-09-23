@@ -1,24 +1,23 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8" />
-  <meta name="ROBOTS" content="NOODP" />
-  <meta name="viewport" content="initial-scale=1" />
-  <%#
-    Configure default and controller-, and view-specific titles in
-    config/locales/en.yml. For more see:
-    https://github.com/calebthompson/title#usage
-  %>
-  <title><%= t('titles.application') %></title>
-  <%= stylesheet_link_tag :application, media: "all" %>
-  <%= csrf_meta_tags %>
-</head>
-<body class="<%= body_class %>">
-  <div class="container">
-    <h1>Tomatobot</h1>
-    <%= render "flashes" -%>
-    <%= yield %>
-    <%= render "javascript" %>
-  </div>
-</body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="ROBOTS" content="NOODP" />
+    <meta name="viewport" content="initial-scale=1" />
+    <title><%= t('titles.application') %></title>
+    <%= stylesheet_link_tag :application, media: "all" %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body class="<%= body_class %>">
+    <div class="container">
+      <header role="banner">
+        <h1>Tomatobot</h1>
+      </header>
+      <main role="main">
+        <%= render "flashes" -%>
+        <%= yield %>
+      </main>
+      <%= render "javascript" %>
+    </div>
+  </body>
 </html>
