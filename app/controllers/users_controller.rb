@@ -7,6 +7,7 @@ class UsersController < ApplicationController
 
   def update
     @user.update(user_params)
+    SendAmplitudeEventWorker.perform_async(@user.slack_id, "save-settings")
     redirect_to edit_user_path(id: @user.id, key: @user.url_key), 
                 alert: t("users.update.successful")
   end
@@ -17,6 +18,7 @@ class UsersController < ApplicationController
       @user.update(slack_token: exchanged_token[:access_token])
       redirect_to edit_user_path(id: @user.id, key: @user.url_key), 
                   alert: t("users.update_token.successful")
+      SendAmplitudeEventWorker.perform_async(@user.slack_id, "personal-auth")
     else
       redirect_to edit_user_path(id: @user.id, key: @user.url_key), 
                   alert: t("users.update_token.no_code")

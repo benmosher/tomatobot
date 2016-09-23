@@ -5,7 +5,8 @@ class CommandsController < ApplicationController
   before_action :check_team
   before_action :check_action
   before_action :find_or_create_user
-  before_action :send_notification, if: "ENV[\"NOTIFICATION_URL\"].present?"
+  after_action :send_notification, if: "ENV[\"NOTIFICATION_URL\"].present?"
+  after_action :send_to_amplitude
 
   def startwork
     return help_response if help_requested?
@@ -16,7 +17,7 @@ class CommandsController < ApplicationController
                              task.id, 
                              params[:response_url],
                              start_dnd?)
-    render text: started_work_message
+    render json: response_json(started_work_message, response_type)
   end
 
   def distraction
@@ -25,7 +26,7 @@ class CommandsController < ApplicationController
     return no_previous if last_task.nil?
     last_task.distraction << params[:text]
     last_task.save
-    render text: t("commands.distraction.saved")
+    render json: response_json(t("commands.distraction.saved"), response_type)
   end
 
   def completed
@@ -34,13 +35,12 @@ class CommandsController < ApplicationController
     return no_previous if last_task.nil?
     last_task.completed << params[:text]
     last_task.save
-    render text: t("commands.completed.saved")
+    render json: response_json(t("commands.completed.saved"), response_type)
   end
 
   def review
     return help_response if help_requested?
     return date_parse_failed if beginning_of_review_date.nil?
-    response_type = "in_channel" if review_publicly?
     @tasks = @user.tasks.
               where("created_at >= ?", beginning_of_review_date).
               where("created_at <= ?", beginning_of_review_date + 1.day)
@@ -54,6 +54,11 @@ private
       response_type: response_type,
       text: text
     }
+  end
+
+  def response_type
+    return "in_channel" if review_publicly?
+    "ephemeral"
   end
 
   def beginning_of_review_date
@@ -169,8 +174,18 @@ private
   def send_notification
     SendNotificationWorker.perform_in(3.seconds, params[:response_url])
   end
+
   def token
     return "test_token" if Rails.env.test?
     ENV["SLACK_COMMAND_TOKEN"]
+  end
+  
+  def send_to_amplitude
+    SendAmplitudeEventWorker.perform_async(@user.slack_id, log_action)
+  end
+
+  def log_action
+    return "help-#{params[:action]}" if help_requested?
+    params[:action]
   end
 end
