@@ -43,7 +43,7 @@ private
   end
 
   def user_params
-    params.require(:user).permit(:dnd_mode, :timezone)
+    params.require(:user).permit(:dnd_mode, :timezone, :duration)
   end
 
   def token_redirect_uri

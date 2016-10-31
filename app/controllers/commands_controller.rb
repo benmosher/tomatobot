@@ -113,7 +113,7 @@ private
 
   def unit_duration
     if Rails.env.production?
-      25
+      @user.duration
     else
       2
     end

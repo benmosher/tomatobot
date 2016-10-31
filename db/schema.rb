@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160427100303) do
+ActiveRecord::Schema.define(version: 20161031173922) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 20160427100303) do
     t.string   "url_key"
     t.string   "timezone"
     t.boolean  "dnd_mode",    default: false
+    t.integer  "duration",    default: 25
   end
 
   add_index "users", ["slack_id"], name: "index_users_on_slack_id", unique: true, using: :btree

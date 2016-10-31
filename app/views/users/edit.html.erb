@@ -12,7 +12,12 @@
           <h3><%= t("users.edit.profile.heading") %></h3>
           <div class="form-group">
             <%= u.label :timezone %>
-            <%= u.time_zone_select :timezone %>
+            <%= u.time_zone_select :timezone, nil, {}, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= u.label :duration, t("users.edit.duration.label") %>
+            <%= u.number_field :duration, class: "form-control" %>
+            <p class="help-block"><%= t("users.edit.duration.help") %></p>
           </div>
         </div>
         <div class="col-md-6">

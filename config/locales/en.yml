@@ -33,6 +33,9 @@ en:
       lead: If you want to customize how I work, these are your personal settings. Anything you change here only affects you, and not the rest of the team.
       profile:
         heading: Profile 
+      duration:
+        label: Deafult task duration
+        help: The number of minutes that new task should take (this will not affect any currently running tasks)
       dnd:
         heading: Do Not Disturb
         no_access: If you like, I can start automatically enabling and disabling "Do Not Disturb" mode on Slack for you. To do this, I'll need some extra permissions spcifically for your user on Slack. You can grant these using the "Add to Slack" button below.
@@ -49,7 +52,7 @@ en:
       started: Time has started. You'll get a message when your 25 minutes is up. Remember, if you encounter a potential distraction, just type `/distraction` followed by a quick note about what it is, and you'll be reminded to look at it during your break.
       already_active: You're already part way through a task, so you can't start another until this one's finished. You have %{time} remaining.
       dnd_started: I've snoozed your Slack notifications temporarily, and I'll enable them again at the end
-      offer_dnd: If you like, I can automatically snooze your notifications while you're focusing.
+      offer_dnd: If you like, I can automatically snooze your notifications while you're focusing, or you can customize the duration of your tasks.
     distraction:
       help: Type `/distraction` followed by the name of the thing you were almost distracted by. I'll keep it safe, and remind you during your break, so you can jump straight back to focusing on your work.
       missing: You must type `/distraction`, then a word or two about the thing that's distracting you. For example, say `/distraction Call Jaakko` and during your break, you'll get a reminder about it. 

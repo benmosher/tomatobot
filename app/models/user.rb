@@ -4,6 +4,9 @@ class User < ActiveRecord::Base
   validates :name, presence: true
   validates :slack_id, presence: true, uniqueness: true
   validates :dnd_mode, absence: true, if: "slack_token.nil?"
+  validates :duration, presence: true, 
+                       numericality: { greater_than: 0, 
+                                       less_than_or_equal_to: 480 }
 
   before_save :update_url_key
   after_create :report_creation
