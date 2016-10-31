@@ -47,7 +47,7 @@ en:
     startwork:
       help: Just type `/startwork` when you want to start. Tomatobot will notify you after 25 minutes, when it's time to give your focus a rest.
       started: Time has started. You'll get a message when your 25 minutes is up. Remember, if you encounter a potential distraction, just type `/distraction` followed by a quick note about what it is, and you'll be reminded to look at it during your break.
-      already_active: You're already part way through a Pomodoro unit, so you can't start another until this one's finished. You have %{time} remaining.
+      already_active: You're already part way through a task, so you can't start another until this one's finished. You have %{time} remaining.
       dnd_started: I've snoozed your Slack notifications temporarily, and I'll enable them again at the end
       offer_dnd: If you like, I can automatically snooze your notifications while you're focusing.
     distraction:
@@ -61,7 +61,7 @@ en:
       saved: Understood. I'll keep a note of this so you can review everything later. 
       no_tasks: You haven't started working yet. Once you start working, use `/completed` to record things you get done.
     review:
-      help: Type `/review` to see a summary of your Pomodoro units today, and what stuff you got done.
+      help: Type `/review` to see a summary of your tasks today, and what stuff you got done.
       date_parse_failed: Sorry, I didn't understand the date. Type `/review` followed the date you would like to review your work for, for example, `review yesterday` or `/review 2016-03-10`.
   workers:
     end_work:

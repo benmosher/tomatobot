@@ -70,7 +70,7 @@ RSpec.describe CommandsController, type: :controller do
       expect(assigns(:user).name).to eq("Sam")
     end
 
-    it "fails if a pomodoro is part-way through" do
+    it "fails if a task is part-way through" do
       post :startwork, start_attributes
       Timecop.travel(Time.now + 1.minute) do
         post :startwork, start_attributes
