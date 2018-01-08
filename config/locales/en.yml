@@ -34,7 +34,7 @@ en:
       profile:
         heading: Profile 
       duration:
-        label: Deafult task duration
+        label: Default task duration
         help: The number of minutes that new task should take (this will not affect any currently running tasks)
       dnd:
         heading: Do Not Disturb
